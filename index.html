@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlonBets — Suscribite al Boletín VIP</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;800;900&family=Barlow+Condensed:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #4ade80;
+    --green-dim: #22c55e;
+    --green-dark: #0d2818;
+    --gold: #fbbf24;
+    --bg: #070a0d;
+    --surface: #0d1117;
+    --card: #111820;
+    --border: #1e2d3d;
+    --text: #f1f5f9;
+    --muted: #64748b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* background glow effects */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -100px; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 400px;
+    background: radial-gradient(ellipse, rgba(74,222,128,0.08) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    bottom: -100px; right: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(ellipse, rgba(251,191,36,0.05) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 480px;
+    position: relative;
+    z-index: 2;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* TOP ACCENT */
+  .accent-line {
+    height: 3px;
+    background: var(--green);
+    border-radius: 3px 3px 0 0;
+  }
+
+  /* CARD */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    padding: 36px 32px 32px;
+  }
+
+  /* HEADER */
+  .brand {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .brand-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    color: var(--green);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .brand-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px;
+    line-height: 1;
+    color: #fff;
+    letter-spacing: 0.02em;
+    margin-bottom: 2px;
+  }
+
+  .brand-title span { color: var(--green); }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    justify-content: center;
+    margin: 12px 0 14px;
+  }
+
+  .divider-line {
+    height: 1px;
+    width: 60px;
+    background: var(--border);
+  }
+
+  .divider-center {
+    height: 1px;
+    width: 80px;
+    background: var(--green);
+  }
+
+  .brand-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  /* PERKS */
+  .perks {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 28px;
+  }
+
+  .perk {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: #94a3b8;
+    font-weight: 500;
+  }
+
+  .perk-check {
+    width: 18px; height: 18px;
+    background: rgba(74,222,128,0.15);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 10px;
+    color: var(--green);
+    font-weight: 800;
+  }
+
+  /* FORM */
+  .form-group {
+    margin-bottom: 14px;
+  }
+
+  label {
+    display: block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .input-wrap {
+    position: relative;
+  }
+
+  .input-icon {
+    position: absolute;
+    left: 14px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 15px;
+    pointer-events: none;
+  }
+
+  input {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px 12px 40px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+  }
+
+  input::placeholder { color: #334155; }
+
+  input:focus {
+    border-color: var(--green-dim);
+    box-shadow: 0 0 0 3px rgba(74,222,128,0.08);
+  }
+
+  /* TELEGRAM hint */
+  .telegram-hint {
+    font-size: 11px;
+    color: #334155;
+    margin-top: 5px;
+    padding-left: 2px;
+  }
+
+  /* SUBMIT */
+  .btn {
+    width: 100%;
+    background: var(--green);
+    color: #041a08;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.15s, transform 0.1s;
+  }
+
+  .btn:hover { background: #86efac; transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+
+  .btn-arrow { font-size: 18px; }
+
+  /* SUCCESS STATE */
+  .success {
+    display: none;
+    text-align: center;
+    padding: 16px 0 8px;
+    animation: fadeUp 0.4s ease both;
+  }
+
+  .success-icon {
+    font-size: 48px;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .success-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: var(--green);
+    letter-spacing: 0.02em;
+    margin-bottom: 8px;
+  }
+
+  .success-sub {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ERROR */
+  .error-msg {
+    display: none;
+    background: rgba(239,68,68,0.1);
+    border: 1px solid rgba(239,68,68,0.3);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: #f87171;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  /* LOADING */
+  .btn.loading {
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  .btn.loading::after {
+    content: '';
+    width: 16px; height: 16px;
+    border: 2px solid rgba(4,26,8,0.3);
+    border-top-color: #041a08;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    margin-left: 8px;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* FOOTER NOTE */
+  .footer-note {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 11px;
+    color: #1e2d3d;
+    line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="accent-line"></div>
+
+  <div class="card">
+
+    <!-- HEADER -->
+    <div class="brand">
+      <p class="brand-name">A L O N B E T S</p>
+      <h1 class="brand-title">BOLETÍN <span>VIP</span></h1>
+      <div class="divider">
+        <div class="divider-line"></div>
+        <div class="divider-center"></div>
+        <div class="divider-line"></div>
+      </div>
+      <p class="brand-sub">Ventaja real cada semana</p>
+    </div>
+
+    <!-- PERKS -->
+    <div class="perks">
+      <div class="perk">
+        <div class="perk-check">✓</div>
+        Picks semanales con análisis real
+      </div>
+      <div class="perk">
+        <div class="perk-check">✓</div>
+        Noticias clave que afectan las apuestas
+      </div>
+      <div class="perk">
+        <div class="perk-check">✓</div>
+        Estadísticas y track record verificado
+      </div>
+      <div class="perk">
+        <div class="perk-check">✓</div>
+        100% gratis — directo a tu email
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div id="form-wrap">
+
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <div class="input-wrap">
+          <span class="input-icon">👤</span>
+          <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" autocomplete="given-name" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <div class="input-wrap">
+          <span class="input-icon">✉️</span>
+          <input type="email" id="email" name="email" placeholder="tu@email.com" autocomplete="email" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="telegram">Usuario de Telegram</label>
+        <div class="input-wrap">
+          <span class="input-icon">✈️</span>
+          <input type="text" id="telegram" name="telegram" placeholder="@tuusuario" autocomplete="off">
+        </div>
+        <p class="telegram-hint">Opcional — para recibir alertas rápidas</p>
+      </div>
+
+      <button class="btn" id="submit-btn" onclick="handleSubmit(event)">
+        Quiero el boletín <span class="btn-arrow">›</span>
+      </button>
+
+      <div class="error-msg" id="error-msg">
+        Hubo un error. Intentá de nuevo en unos segundos.
+      </div>
+
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="success" id="success">
+      <span class="success-icon">🎯</span>
+      <div class="success-title">¡YA ESTÁS DENTRO!</div>
+      <p class="success-sub">
+        Te llegará el próximo boletín<br>
+        directo a tu email. Bienvenido al VIP.
+      </p>
+    </div>
+
+  </div>
+
+  <p class="footer-note">
+    © 2026 AlonBets · Sin spam · Podés darte de baja cuando quieras
+  </p>
+
+</div>
+
+<script>
+  // ── REEMPLAZÁ esta URL por tu Webhook de n8n ──
+  const WEBHOOK_URL = 'TU_WEBHOOK_URL_AQUI';
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const nombre   = document.getElementById('nombre').value.trim();
+    const email    = document.getElementById('email').value.trim();
+    const telegram = document.getElementById('telegram').value.trim();
+
+    // validación básica
+    if (!nombre || !email) {
+      showError('Por favor completá nombre y email.');
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showError('El email no parece válido.');
+      return;
+    }
+
+    const btn = document.getElementById('submit-btn');
+    btn.classList.add('loading');
+    btn.textContent = '';
+    hideError();
+
+    try {
+      await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nombre,
+          email,
+          telegram: telegram.startsWith('@') ? telegram : (telegram ? '@' + telegram : ''),
+          activo: 'TRUE',
+          fecha_registro: new Date().toISOString().split('T')[0]
+        })
+      });
+
+      // mostrar éxito sin importar la respuesta
+      document.getElementById('form-wrap').style.display = 'none';
+      document.getElementById('success').style.display = 'block';
+
+    } catch (err) {
+      btn.classList.remove('loading');
+      btn.innerHTML = 'Quiero el boletín <span class="btn-arrow">›</span>';
+      showError('Hubo un error. Intentá de nuevo.');
+    }
+  }
+
+  function showError(msg) {
+    const el = document.getElementById('error-msg');
+    el.textContent = msg;
+    el.style.display = 'block';
+  }
+
+  function hideError() {
+    document.getElementById('error-msg').style.display = 'none';
+  }
+</script>
+
+</body>
+</html>
